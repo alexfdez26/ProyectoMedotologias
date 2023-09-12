@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.5"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+defaultTasks 'clean','test','aggregate'
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/junit/junit
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core
+    implementation group: 'net.serenity-bdd', name: 'serenity-core', version: '3.2.5'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit
+    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: '3.2.5'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-screenplay
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: '3.2.5'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-ensure
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-ensure', version: '3.2.5'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '3.2.5'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-rest-assured
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-rest-assured', version: '3.2.5'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-screenplay-rest
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: '3.2.5'
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.15.1'
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
+
+    //importante para lombok
+    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.15.1'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
+}
+
+/*
+test {
+    useJUnitPlatform()
+}
+*/
